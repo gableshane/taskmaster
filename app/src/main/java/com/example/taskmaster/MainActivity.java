@@ -3,9 +3,12 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +16,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String username = p.getString("username","default");
+
+        if(username != "default"){
+            TextView greeting = findViewById(R.id.greeting);
+            greeting.setText(username + "'s tasks");
+        }
+
+        Button settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToSettings = new Intent(MainActivity.this,Settings.class);
+                MainActivity.this.startActivity(goToSettings);
+            }
+        });
 
 
         Button addTaskButton = findViewById(R.id.addTask);
@@ -33,5 +53,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button task1Button = findViewById(R.id.task1);
+        task1Button.setOnClickListener((v)->{
+
+            Intent i = new Intent(MainActivity.this,TaskDetail.class);
+            i.putExtra("taskTitle",task1Button.getText().toString());
+            startActivity(i);
+        });
+
+        Button task2Button = findViewById(R.id.task2);
+        task2Button.setOnClickListener((v)->{
+
+            Intent i = new Intent(MainActivity.this,TaskDetail.class);
+            i.putExtra("taskTitle",task2Button.getText().toString());
+            startActivity(i);
+        });
+
+        Button task3Button = findViewById(R.id.task3);
+        task3Button.setOnClickListener((v)->{
+
+            Intent i = new Intent(MainActivity.this,TaskDetail.class);
+            i.putExtra("taskTitle",task3Button.getText().toString());
+            startActivity(i);
+        });
     }
 }
