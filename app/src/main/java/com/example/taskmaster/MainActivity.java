@@ -52,29 +52,5 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(goToAllTasks);
             }
         });
-
-        Button task1Button = findViewById(R.id.task1);
-        task1Button.setOnClickListener((v)->{
-
-            Intent i = new Intent(MainActivity.this,TaskDetail.class);
-            i.putExtra("taskTitle",task1Button.getText().toString());
-            startActivity(i);
-        });
-
-        Button task2Button = findViewById(R.id.task2);
-        task2Button.setOnClickListener((v)->{
-
-            Intent i = new Intent(MainActivity.this,TaskDetail.class);
-            i.putExtra("taskTitle",task2Button.getText().toString());
-            startActivity(i);
-        });
-
-        Button task3Button = findViewById(R.id.task3);
-        task3Button.setOnClickListener((v)->{
-
-            Intent i = new Intent(MainActivity.this,TaskDetail.class);
-            i.putExtra("taskTitle",task3Button.getText().toString());
-            startActivity(i);
-        });
     }
 }

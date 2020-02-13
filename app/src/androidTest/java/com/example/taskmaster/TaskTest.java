@@ -46,4 +46,15 @@ public class TaskTest {
         tasky.setDescription("Apple");
         assertEquals("Tasky description should be Apple","Apple",tasky.getDescription());
     }
+
+    @Test
+    public void setStateTest(){
+        tasky.setState("In Progress");
+        assertEquals("Tasky description should be Apple","In Progress",tasky.getState());
+    }
+
+    @Test
+    public void getStateTest(){
+        assertEquals("Tasky description should be Apple","New",tasky.getState());
+    }
 }
