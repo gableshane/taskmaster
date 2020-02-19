@@ -73,7 +73,13 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
         });
     }
     @Override
-    public void onListFragmentInteraction(Task task){
+    public void onTaskInteraction(Task task){
+
         Log.i(TAG, task.getTitle() + " was clicked on.");
+
+        Intent goToTaskDetail = new Intent(this, TaskDetail.class);
+        goToTaskDetail.putExtra("taskTitle",task.getTitle());
+
+        this.startActivity(goToTaskDetail);
     }
 }

@@ -15,3 +15,10 @@ The Taskmaster app now has a settings button on the home page where the user can
 There are also 3 hard coded task's on the home page now and when you click the title of that task will be displayed in the task detail activity as shown below.
 
 ![image description](screenshots/taskdetail.png)
+
+
+Day ??
+
+Days later, I have finally figured out how to get this working. The app now displays a recycler view and you can click through to the task detail page via the recycler view.
+
+![image description](screenshots/wednesday.png)

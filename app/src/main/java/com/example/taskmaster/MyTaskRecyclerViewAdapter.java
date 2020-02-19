@@ -45,7 +45,8 @@ public class MyTaskRecyclerViewAdapter extends RecyclerView.Adapter<MyTaskRecycl
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    Log.i(TAG, v + "it was clicked");
+                    mListener.onTaskInteraction(holder.mItem);
+
                 }
             }
         });
@@ -77,6 +78,6 @@ public class MyTaskRecyclerViewAdapter extends RecyclerView.Adapter<MyTaskRecycl
 
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(Task task);
+        void onTaskInteraction(Task task);
     }
 }
