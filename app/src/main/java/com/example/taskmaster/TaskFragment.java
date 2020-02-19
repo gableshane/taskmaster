@@ -72,11 +72,6 @@ public class TaskFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            List<Task> listOfTasks = new ArrayList<>();
-            listOfTasks.add(new Task("Test1","Test1"));
-            listOfTasks.add(new Task("Test2","Test2"));
-            listOfTasks.add(new Task("Test3","Test3"));
-            recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, mListener));
         }
         return view;
     }
@@ -112,6 +107,6 @@ public class TaskFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Task task);
     }
 }

@@ -1,16 +1,26 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements MyTaskRecyclerViewAdapter.OnListFragmentInteractionListener{
+
+
+    private String TAG = "stg.MainActivity";
+    List<Task> listOfTasks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
             TextView greeting = findViewById(R.id.greeting);
             greeting.setText(username + "'s tasks");
         }
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
+        listOfTasks.add(new Task("Test1","Test1"));
+        listOfTasks.add(new Task("Test2","Test2"));
+        listOfTasks.add(new Task("Test3","Test3"));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, this));
+
 
         Button settingsButton = findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -52,5 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(goToAllTasks);
             }
         });
+    }
+    @Override
+    public void onListFragmentInteraction(Task task){
+        Log.i(TAG, task.getTitle() + " was clicked on.");
     }
 }
