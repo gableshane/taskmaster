@@ -21,4 +21,4 @@ Day ??
 
 Days later, I have finally figured out how to get this working. The app now displays a recycler view and you can click through to the task detail page via the recycler view.
 
-![image description](screenshots/wednesday.png)
+![image description](screenshots/Wednesday.png)
