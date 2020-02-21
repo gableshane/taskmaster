@@ -37,7 +37,7 @@ public class AllTasks extends AppCompatActivity implements MyTaskRecyclerViewAda
 
         Log.i(TAG, task.getTitle() + " was clicked on.");
 
-        CharSequence charSequence = task.getTitle();
+        CharSequence charSequence = task.getDescription();
         Toast.makeText(getApplicationContext(), charSequence,Toast.LENGTH_SHORT).show();
     }
 }
