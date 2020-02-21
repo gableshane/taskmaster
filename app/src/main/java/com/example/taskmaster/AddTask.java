@@ -11,14 +11,14 @@ import android.widget.TextView;
 
 public class AddTask extends AppCompatActivity{
 
-    myDatabase myDb;
+    MyDatabase myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-        myDb = Room.databaseBuilder(getApplicationContext(), myDatabase.class, "Task_Master").allowMainThreadQueries().build();
+        myDb = Room.databaseBuilder(getApplicationContext(), MyDatabase.class, "Task_Master").allowMainThreadQueries().build();
 
 
         Button addTask = findViewById(R.id.addTaskButton);

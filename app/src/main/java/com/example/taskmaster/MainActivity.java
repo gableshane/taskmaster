@@ -22,14 +22,14 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
 
     private String TAG = "stg.MainActivity";
     List<Task> listOfTasks = new ArrayList<>();
-    myDatabase myDb;
+    MyDatabase myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myDb = Room.databaseBuilder(getApplicationContext(), myDatabase.class, "Task_Master").allowMainThreadQueries().build();
+        myDb = Room.databaseBuilder(getApplicationContext(), MyDatabase.class, "Task_Master").allowMainThreadQueries().build();
         this.listOfTasks = myDb.taskDao().getAll();
 
 
