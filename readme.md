@@ -22,3 +22,9 @@ Day ??
 Days later, I have finally figured out how to get this working. The app now displays a recycler view and you can click through to the task detail page via the recycler view.
 
 ![image description](screenshots/Wednesday.png)
+
+Day 10
+
+The room database has now been implemented. A user can add a task on the 'Add Task' activity by clicking the Add Task button on the Main Activity. The task will be saved to the database and then be visible on the Main Activity after the app restarts.
+
+![image description](screenshots/Room.png)

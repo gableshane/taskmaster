@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,11 +22,16 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
 
     private String TAG = "stg.MainActivity";
     List<Task> listOfTasks = new ArrayList<>();
+    myDatabase myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myDb = Room.databaseBuilder(getApplicationContext(), myDatabase.class, "Task_Master").allowMainThreadQueries().build();
+        this.listOfTasks = myDb.taskDao().getAll();
+
 
         SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String username = p.getString("username","default");
@@ -36,10 +42,6 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
         }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-
-        listOfTasks.add(new Task("Test1","Test1"));
-        listOfTasks.add(new Task("Test2","Test2"));
-        listOfTasks.add(new Task("Test3","Test3"));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, this));
 
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
 
         Intent goToTaskDetail = new Intent(this, TaskDetail.class);
         goToTaskDetail.putExtra("taskTitle",task.getTitle());
+        goToTaskDetail.putExtra("taskDescription",task.getDescription());
 
         this.startActivity(goToTaskDetail);
     }
