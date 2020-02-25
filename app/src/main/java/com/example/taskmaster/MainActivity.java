@@ -14,23 +14,46 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.amazonaws.amplify.generated.graphql.ListTasksQuery;
+import com.amazonaws.mobile.config.AWSConfiguration;
+import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
+import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
+import com.apollographql.apollo.GraphQLCall;
+import com.apollographql.apollo.api.Response;
+import com.apollographql.apollo.exception.ApolloException;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nonnull;
 
 public class MainActivity extends AppCompatActivity implements MyTaskRecyclerViewAdapter.OnListFragmentInteractionListener{
 
 
     private String TAG = "stg.MainActivity";
-    List<Task> listOfTasks = new ArrayList<>();
-    MyDatabase myDb;
+    List<Task> listOfTasks;
+//    MyDatabase myDb;
+
+    private AWSAppSyncClient mAWSAppSyncClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myDb = Room.databaseBuilder(getApplicationContext(), MyDatabase.class, "Task_Master").allowMainThreadQueries().build();
-        this.listOfTasks = myDb.taskDao().getAll();
+        mAWSAppSyncClient = AWSAppSyncClient.builder()
+                .context(getApplicationContext())
+                .awsConfiguration(new AWSConfiguration(getApplicationContext()))
+                .build();
+
+
+//        myDb = Room.databaseBuilder(getApplicationContext(), MyDatabase.class, "Task_Master").allowMainThreadQueries().build();
+//        this.listOfTasks = myDb.taskDao().getAll();
+
+        listOfTasks = new ArrayList<>();
+        runTaskQuery();
 
 
         SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -85,4 +108,31 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
 
         this.startActivity(goToTaskDetail);
     }
+
+    public void runTaskQuery(){
+        mAWSAppSyncClient.query(ListTasksQuery.builder().build())
+                .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
+                .enqueue(tasksCallback);
+    }
+
+    // I asked Micah for help with this and then looked at his repo to see if I had done something wrong...
+    // It turns out it was just broken because my emulator wasn't updating for some reason. It worked once I uninstalled the app.
+
+    private GraphQLCall.Callback<ListTasksQuery.Data> tasksCallback = new GraphQLCall.Callback<ListTasksQuery.Data>() {
+        @Override
+        public void onResponse(@Nonnull Response<ListTasksQuery.Data> response) {
+
+            Log.i("Results", response.data().listTasks().items().toString());
+
+            for(ListTasksQuery.Item item : response.data().listTasks().items()){
+                Task task = new Task(item.name(),item.description());
+                listOfTasks.add(task);
+            }
+        }
+
+        @Override
+        public void onFailure(@Nonnull ApolloException e) {
+            Log.e("ERROR", e.toString());
+        }
+    };
 }

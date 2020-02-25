@@ -34,3 +34,9 @@ Day 10.01
 There is now a second recycler view on the All Tasks activity. On click it displays the discription as a toast.
 
 ![image description](screenshots/toast.png)
+
+Day 12
+
+I was able to add Amplify to the applicationa and you can now add tasks to the DynamoDB.
+
+![image description](screenshots/dynamoDB.png)
