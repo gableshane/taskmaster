@@ -1,0 +1,15 @@
+{
+    "mac": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-taskmaster-mac-152608-authRole",
+            "UnauthRoleArn": "arn:aws:iam::246200486663:role/amplify-taskmaster-mac-152608-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::246200486663:role/amplify-taskmaster-mac-152608-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-taskmaster-mac-152608-deployment",
+            "UnauthRoleName": "amplify-taskmaster-mac-152608-unauthRole",
+            "StackName": "amplify-taskmaster-mac-152608",
+            "StackId": "arn:aws:cloudformation:us-west-2:246200486663:stack/amplify-taskmaster-mac-152608/0b9f0f50-575d-11ea-b35f-0294f1fd1ce8",
+            "AmplifyAppId": "d37o9rtkf1rtss"
+        }
+    }
+}
