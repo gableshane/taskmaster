@@ -6,7 +6,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.taskmaster"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,12 @@ android {
 dependencies {
     def room_version = "2.2.4"
 
+    //For AWSMobileClient only:
+    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.15.+'
+
+//For the drop-in UI also:
+    implementation 'com.amazonaws:aws-android-sdk-auth-userpools:2.15.+'
+    implementation 'com.amazonaws:aws-android-sdk-auth-ui:2.15.+'
 
     implementation 'androidx.room:room-runtime:2.2.4'
     annotationProcessor 'androidx.room:room-compiler:2.2.4'
