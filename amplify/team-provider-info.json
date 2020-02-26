@@ -10,6 +10,11 @@
             "StackName": "amplify-taskmaster-mac-152608",
             "StackId": "arn:aws:cloudformation:us-west-2:246200486663:stack/amplify-taskmaster-mac-152608/0b9f0f50-575d-11ea-b35f-0294f1fd1ce8",
             "AmplifyAppId": "d37o9rtkf1rtss"
+        },
+        "categories": {
+            "auth": {
+                "taskmaster866cb7cf": {}
+            }
         }
     }
 }
