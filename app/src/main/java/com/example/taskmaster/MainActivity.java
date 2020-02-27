@@ -101,9 +101,16 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
                 }
         );
 
+        String username;
 
-        SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String username = p.getString("username","default");
+        try {
+            username = AWSMobileClient.getInstance().getUsername();
+        } catch (Exception e){
+            username = "default";
+        }
+
+//        SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//        String username = p.getString("username","default");
 
         if(username != "default"){
             TextView greeting = findViewById(R.id.greeting);
@@ -140,6 +147,16 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
             public void onClick(View v) {
                 Intent goToAllTasks = new Intent(MainActivity.this, AllTasks.class);
                 MainActivity.this.startActivity(goToAllTasks);
+            }
+        });
+
+        Button logoutButton = findViewById(R.id.logout);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AWSMobileClient.getInstance().signOut();
+                Intent reload = new Intent(MainActivity.this, MainActivity.class);
+                MainActivity.this.startActivity(reload);
             }
         });
     }
