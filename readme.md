@@ -40,3 +40,9 @@ Day 12
 I was able to add Amplify to the applicationa and you can now add tasks to the DynamoDB.
 
 ![image description](screenshots/dynamoDB.png)
+
+Day 14
+
+Cognito is now set up with the ability to log in, log out, and the username is displayed in the main activity.
+
+![image description](screenshots/cognito.png)
