@@ -22,6 +22,7 @@ import com.amazonaws.mobile.client.UserStateDetails;
 import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
 import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferService;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.ResultListener;
 import com.amplifyframework.storage.result.StorageUploadFileResult;
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
                 .context(getApplicationContext())
                 .awsConfiguration(new AWSConfiguration(getApplicationContext()))
                 .build();
+
+        getApplicationContext().startService(new Intent(getApplicationContext(), TransferService.class));
+
+
 
 
 //        myDb = Room.databaseBuilder(getApplicationContext(), MyDatabase.class, "Task_Master").allowMainThreadQueries().build();
@@ -174,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
                     Amplify.addPlugin(new AWSS3StoragePlugin());
                     Amplify.configure(getApplicationContext());
                     Log.i("StorageQuickstart", "All set and ready to go!");
-                    uploadFile();
                 } catch (Exception e) {
                     Log.e("StorageQuickstart", e.getMessage());
                 }
