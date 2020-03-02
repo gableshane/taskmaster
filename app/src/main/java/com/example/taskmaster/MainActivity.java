@@ -23,11 +23,16 @@ import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
 import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.ResultListener;
+import com.amplifyframework.storage.result.StorageUploadFileResult;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.apollographql.apollo.GraphQLCall;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -169,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
                     Amplify.addPlugin(new AWSS3StoragePlugin());
                     Amplify.configure(getApplicationContext());
                     Log.i("StorageQuickstart", "All set and ready to go!");
+                    uploadFile();
                 } catch (Exception e) {
                     Log.e("StorageQuickstart", e.getMessage());
                 }
@@ -218,4 +224,32 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
             Log.e("ERROR", e.toString());
         }
     };
+
+    private void uploadFile() {
+        File sampleFile = new File(getApplicationContext().getFilesDir(), "sample.txt");
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(sampleFile));
+            writer.append("Howdy World!");
+            writer.close();
+        }
+        catch(Exception e) {
+            Log.e("StorageQuickstart", e.getMessage());
+        }
+
+        Amplify.Storage.uploadFile(
+                "myUploadedFileName.txt",
+                sampleFile.getAbsolutePath(),
+                new ResultListener<StorageUploadFileResult>() {
+                    @Override
+                    public void onResult(StorageUploadFileResult result) {
+                        Log.i("StorageQuickStart", "Successfully uploaded: " + result.getKey());
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+                        Log.e("StorageQuickstart", "Upload error.", error);
+                    }
+                }
+        );
+    }
 }
