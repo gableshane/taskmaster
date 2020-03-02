@@ -10,6 +10,7 @@
         android:id="@+id/taskTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
         android:ems="10"
         android:hint="My Task Title"
         android:inputType="text"
@@ -17,14 +18,17 @@
         app:layout_constraintBottom_toTopOf="@+id/taskDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTaskHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/submitted" />
 
     <TextView
         android:id="@+id/addTaskHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginBottom="17dp"
         android:text="Add Task"
-        app:layout_constraintBottom_toTopOf="@+id/taskTitle"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/submitted"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,42 +37,68 @@
         android:id="@+id/taskDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Task Description"
         app:layout_constraintBottom_toTopOf="@+id/addTaskButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/taskTitle"
         app:layout_constraintTop_toBottomOf="@+id/taskTitle" />
 
     <Button
         android:id="@+id/addTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="98dp"
         android:text="Add Task"
-        app:layout_constraintBottom_toTopOf="@+id/totalTasks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/taskDescription"
+        app:layout_constraintStart_toStartOf="@+id/taskDescription"
         app:layout_constraintTop_toBottomOf="@+id/taskDescription" />
 
     <TextView
         android:id="@+id/totalTasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="54dp"
         android:text="Total Tasks: "
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTaskButton" />
+        app:layout_constraintStart_toStartOf="@+id/filePicker"
+        app:layout_constraintTop_toBottomOf="@+id/filePicker" />
 
     <TextView
         android:id="@+id/submitted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="17dp"
         android:text="Submitted!"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/taskTitle"
+        app:layout_constraintStart_toStartOf="@+id/addTaskHeader"
+        app:layout_constraintTop_toBottomOf="@+id/addTaskHeader" />
+
+    <Button
+        android:id="@+id/filePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="filePicker"
+        android:text="Select File"
+        app:layout_constraintBottom_toTopOf="@+id/totalTasks"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="63dp"
+        app:layout_constraintBottom_toTopOf="@+id/filePicker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTaskHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/addTaskButton"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
