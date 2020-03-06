@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements MyTaskRecyclerVie
         Intent goToTaskDetail = new Intent(this, TaskDetail.class);
         goToTaskDetail.putExtra("taskTitle",task.getTitle());
         goToTaskDetail.putExtra("taskDescription",task.getDescription());
+        goToTaskDetail.putExtra("imageUUID",task.getImage());
 
         this.startActivity(goToTaskDetail);
     }

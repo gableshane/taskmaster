@@ -13,6 +13,7 @@ public class Task {
     private String title;
     private String description;
     public String state;
+    private String image;
 
     public Task(String title, String description){
         this.title = title;
@@ -45,5 +46,13 @@ public class Task {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

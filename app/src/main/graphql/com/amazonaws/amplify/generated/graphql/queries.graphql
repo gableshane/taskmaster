@@ -4,6 +4,7 @@ query GetTask($id: ID!) {
     id
     name
     description
+    image
   }
 }
 query ListTasks(
@@ -16,6 +17,7 @@ query ListTasks(
       id
       name
       description
+      image
     }
     nextToken
   }
