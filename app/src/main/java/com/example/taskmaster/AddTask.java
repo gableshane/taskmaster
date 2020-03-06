@@ -203,6 +203,7 @@ public class AddTask extends AppCompatActivity {
             @Override
             public void onError(int id, Exception ex) {
                 Log.i(TAG,"error");
+                Log.e(TAG, ex.getStackTrace().toString());
                 ex.printStackTrace();
             }
 
