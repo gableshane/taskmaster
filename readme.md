@@ -46,3 +46,10 @@ Day 14
 Cognito is now set up with the ability to log in, log out, and the username is displayed in the main activity.
 
 ![image description](screenshots/cognito.png)
+
+Day ??
+
+S3 finally works! You can pick an image from your phone and upload it.
+![image description](screenshots/filepicker.png)
+![image description](screenshots/picasso.png)
+![image description](screenshots/awsconsole.png)
