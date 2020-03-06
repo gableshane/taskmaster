@@ -4,6 +4,7 @@ subscription OnCreateTask {
     id
     name
     description
+    image
   }
 }
 subscription OnUpdateTask {
@@ -11,6 +12,7 @@ subscription OnUpdateTask {
     id
     name
     description
+    image
   }
 }
 subscription OnDeleteTask {
@@ -18,5 +20,6 @@ subscription OnDeleteTask {
     id
     name
     description
+    image
   }
 }

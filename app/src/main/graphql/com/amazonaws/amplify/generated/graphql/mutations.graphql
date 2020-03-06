@@ -7,6 +7,7 @@ mutation CreateTask(
     id
     name
     description
+    image
   }
 }
 mutation UpdateTask(
@@ -17,6 +18,7 @@ mutation UpdateTask(
     id
     name
     description
+    image
   }
 }
 mutation DeleteTask(
@@ -27,5 +29,6 @@ mutation DeleteTask(
     id
     name
     description
+    image
   }
 }
