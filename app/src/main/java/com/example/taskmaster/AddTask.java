@@ -77,6 +77,16 @@ public class AddTask extends AppCompatActivity {
         EditText descriptionInput = findViewById(R.id.taskDescription);
         TextView submitted = findViewById(R.id.submitted);
 
+        // Get the intent that started this activity
+        Intent intent = getIntent();
+        String type = intent.getType();
+
+        // Figure out what to do based on the intent type
+        if (type != null && intent.getType().contains("image/")) {
+            Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            setImage(imageUri);
+        }
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Channel";
@@ -89,9 +99,9 @@ public class AddTask extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
-        Intent intent = new Intent(this, AddTask.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        Intent i = new Intent(this, AddTask.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -179,11 +189,14 @@ public class AddTask extends AppCompatActivity {
 
         if (requestCode == 543 && resultCode == RESULT_OK && null != data) {
 
-            selectedImage = data.getData();
-            ImageView imageView = findViewById(R.id.imageView2);
-            imageView.setImageURI(selectedImage);
-
+            setImage(data.getData());
         }
+    }
+
+    private void setImage(Uri data){
+        selectedImage = data;
+        ImageView imageView = findViewById(R.id.imageView2);
+        imageView.setImageURI(selectedImage);
     }
 
         public void filePicker (View v){
@@ -266,10 +279,5 @@ public class AddTask extends AppCompatActivity {
         cursor.close();
 
         return filePath;
-    }
-
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
     }
 }
