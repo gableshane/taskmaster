@@ -60,3 +60,6 @@ Notifications have been added to the app. I did not use Lambda, because I'm rush
 Our class did not add teams to our app.
 ![image description](screenshots/notifications.png)
 
+I added an intent filter to the app. You can now share images with Task Master and it will open the Add Task activity and the image will be ready to upload with a new task.
+
+![image description](screenshots/shareable.png)
