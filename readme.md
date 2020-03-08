@@ -53,3 +53,10 @@ S3 finally works! You can pick an image from your phone and upload it.
 ![image description](screenshots/filepicker.png)
 ![image description](screenshots/picasso.png)
 ![image description](screenshots/awsconsole.png)
+
+Final day:
+
+Notifications have been added to the app. I did not use Lambda, because I'm rushing to get these last labs turned in and I'm okay with losing 2 points for not having Lambda.
+Our class did not add teams to our app.
+![image description](screenshots/notifications.png)
+
