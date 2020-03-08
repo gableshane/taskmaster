@@ -2,13 +2,19 @@ package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -55,6 +61,8 @@ public class AddTask extends AppCompatActivity {
     private Uri selectedImage;
     private String fileName;
 
+    static String CHANNEL_ID = "888";
+
 
 
 
@@ -69,7 +77,32 @@ public class AddTask extends AppCompatActivity {
         EditText descriptionInput = findViewById(R.id.taskDescription);
         TextView submitted = findViewById(R.id.submitted);
 
-        Intent intent = getIntent();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Channel";
+            String description = "description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+        Intent intent = new Intent(this, AddTask.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("New Task")
+                .setContentText("A new task has been added")
+                .setContentIntent(pendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+
 
 
 //        myDb = Room.databaseBuilder(getApplicationContext(), MyDatabase.class, "Task_Master").allowMainThreadQueries().build();
@@ -90,6 +123,8 @@ public class AddTask extends AppCompatActivity {
                 submitted.setVisibility(View.VISIBLE);
                 fileName = UUID.randomUUID().toString();
                 runTaskCreateMutation(title,description,fileName);
+                // notificationId is a unique int for each notification that you must define
+                notificationManager.notify((int) (Math.random() * 100), builder.build());
 
                 getApplicationContext().startService(new Intent(getApplicationContext(), TransferService.class));
                 // Initialize the AWSMobileClient if not initialized
@@ -231,5 +266,10 @@ public class AddTask extends AppCompatActivity {
         cursor.close();
 
         return filePath;
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
     }
 }
