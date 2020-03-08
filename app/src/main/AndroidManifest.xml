@@ -21,9 +21,15 @@
         >
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <activity android:name=".Settings"></activity>
-        <activity android:name=".TaskDetail" />
-        <activity android:name=".AllTasks" />
-        <activity android:name=".AddTask" />
+        <activity android:name=".TaskDetail" ></activity>
+        <activity android:name=".AllTasks" ></activity>
+        <activity android:name=".AddTask" >
+            <intent-filter>
+            <action android:name="android.intent.action.SEND"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
